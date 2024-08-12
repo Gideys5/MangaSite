@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import {prendi} from "../api/jikanApi";
+import {catchAnime} from "../api/CallManga";
 
 const CartContext = createContext();
 
@@ -15,7 +15,9 @@ export const CartProvider = ({ children }) => {
         if (!cart.some(cartItem => cartItem.id === item.id)) {
             try {
                 if (item.id && item.id !== 0) {  // Assicurati che l'ID sia valido
-                    const mangaDetails = await prendi(/*item.id*/);
+                    console.log(item.id)
+                    const mangaDetails = await catchAnime(item.id);
+                    console.log(mangaDetails);
                     setCart([...cart, { ...item, details: mangaDetails }]);
                 } else {
                     console.error("ID del manga non valido:", item.id);
