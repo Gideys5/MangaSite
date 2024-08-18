@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+Resoconto del Progresso Finora
+Inizializzazione del Progetto:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Creazione dell'applicazione React utilizzando create-react-app.
 
-## Available Scripts
+Strutturazione delle componenti principali: Navbar, Home, Carrello, ecc.
 
-In the project directory, you can run:
+Configurazione del routing con React Router per navigare tra le diverse pagine.
 
-### `npm start`
+Gestione dello Stato Globale:
+Implementazione del CartContext per gestire il carrello in tutta l'applicazione.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Funzionalità di aggiunta e rimozione di elementi dal carrello.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Integrazione di EmailJS:
+Configurazione dell'invio di email utilizzando EmailJS.
 
-### `npm test`
+Integrazione con il carrello per inviare un'email all'utente con i dettagli dell'ordine.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+API Integration (parzialmente affrontata):
+Tentativo di integrazione dell'API Jikan per ottenere dettagli sui manga.
 
-### `npm run build`
+Problemi di CORS che hanno causato la sospensione temporanea di questa funzionalità.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Navigazione dopo l'ordine:
+Implementazione della funzionalità di navigazione automatica alla home dopo l'invio di un ordine.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`**Prossimi Passi:**
+`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Introduzione a Redux:
 
-### `npm run eject`
+Cos'è Redux?
+Configurazione di Redux nel progetto.
+Creazione di azioni, riduttori (reducers) e lo store globale.
+Gestione dello stato del carrello con Redux.
+Autenticazione Utente:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Implementazione dell'autenticazione usando Firebase.
+Creazione di un sistema di login e registrazione.
+Protezione delle rotte (es. Checkout) per utenti autenticati.
+Integrazione del Database:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Collegamento a un database NoSQL (Firebase Firestore) per gestire gli ordini.
+Salvataggio e recupero dei dati degli utenti e degli ordini.
+Deployment su Firebase:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Configurazione e setup dell'hosting su Firebase.
+Deployment dell'applicazione e gestione delle versioni.
+Verifica che tutte le funzionalità siano correttamente integrate e funzionanti.
+1. Introduzione a Redux:

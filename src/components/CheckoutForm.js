@@ -33,8 +33,8 @@ const CheckoutForm = () => {
             .then((response) => {
                 console.log('SUCCESS!', response.status, response.text);
                 clearCart();
-                alert('Email inviata con successo!');
                 navigate("/");
+                alert('Email inviata con successo!');
             }, (err) => {
                 console.error('FAILED...', err);
             });
