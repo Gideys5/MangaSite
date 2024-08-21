@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 import CartContext from '../context/CartContext';
 import logo from '../anime_photos/logo.jpg';
 
@@ -7,6 +8,7 @@ import logo from '../anime_photos/logo.jpg';
 function Navbar({onSearch}) {
     const { cart } = useContext(CartContext);
     const [searchTerm, setSearchTerm] = useState('');
+    const { user, logout } = useContext(AuthContext);
 
     const handleSearchChange = (e) => {
         const newSearchTerm = e.target.value;
@@ -35,6 +37,11 @@ function Navbar({onSearch}) {
                     <Link to="/cart" className="btn btn-outline-light">
                         Carrello ({cart.length})
                     </Link>
+                    {user ? (
+                        <button className="btn btn-outline-light ml-2" onClick={logout}>Logout</button>
+                    ) : (
+                        <Link to="/login" className="btn btn-outline-light ml-2">Login</Link>
+                    )}
                 </div>
             </div>
         </nav>

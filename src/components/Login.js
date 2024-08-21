@@ -1,21 +1,28 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
+import React, {useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {signInWithEmailAndPassword} from "firebase/auth";
+import {auth} from "../firebase"; // Import corretto
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
 
-            navigate("/");
         try {
-            await auth.signInWithEmailAndPassword(email, password);
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            console.log("User logged in:", user);
+            // Puoi fare una redirezione a una pagina protetta qui
+            navigate('/')
         } catch (error) {
-            console.error("Errore durante il login: ", error);
+            console.error("Error during login:", error);
+            setError(error.message);
         }
     };
 

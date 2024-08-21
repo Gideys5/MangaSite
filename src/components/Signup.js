@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
+import {auth, db} from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import {doc, setDoc} from "firebase/firestore";
 
 const Signup = () => {
     const [email, setEmail] = useState('');
@@ -11,16 +12,23 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('');
 
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
-            navigate('/');
-        } catch (err) {
-            setError(err.message);
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            // Creare un documento nella collezione "users" per l'utente
+            await setDoc(doc(db, "users", user.uid), {
+                email: user.email,
+                password: password,
+                createdAt: new Date(),
+            });
+            navigate("/");
+        } catch (error) {
+            console.error("Error during signup:", error);
+            setError(error.message);
         }
     };
-
     return (
         <div className="container">
             <h2>Sign Up</h2>
