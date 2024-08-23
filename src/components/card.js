@@ -9,7 +9,7 @@ const Card = ({ card }) => {
     return (
         <div className='col'>
             <div className="card" style={{width: `18rem`, textAlign: 'center'}}>
-                <img src={card.immagine} className="card-img-top" alt="..."
+                <img src={card.immagine} className="card-img-top" alt={card.nome}
                      style={{width: `18rem`, height: `16rem`, textAlign: 'center'}}/>
                 <div className="card-body">
                     <h5 className="card-title">{card.nome}</h5>
