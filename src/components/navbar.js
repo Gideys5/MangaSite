@@ -1,19 +1,27 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import CartContext from '../context/CartContext';
 import logo from '../anime_photos/logo.jpg';
+import {auth} from "../firebase";
 
 
 function Navbar({onSearch}) {
     const { cart } = useContext(CartContext);
     const [searchTerm, setSearchTerm] = useState('');
     const { user, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+
 
     const handleSearchChange = (e) => {
         const newSearchTerm = e.target.value;
         setSearchTerm(newSearchTerm);
         onSearch(newSearchTerm);
+    }
+    const handleLogout = async () =>{
+        await auth.signOut();
+        navigate("/login");
+
     }
 
     return (
@@ -38,7 +46,7 @@ function Navbar({onSearch}) {
                         Carrello ({cart.length})
                     </Link>
                     {user ? (
-                        <button className="btn btn-outline-light ml-2" onClick={logout}>Logout</button>
+                        <button className="btn btn-outline-light ml-2" onClick={handleLogout}>Logout</button>
                     ) : (
                         <Link to="/login" className="btn btn-outline-light ml-2">Login</Link>
                     )}

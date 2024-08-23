@@ -23,7 +23,7 @@ const Signup = () => {
                 password: password,
                 createdAt: new Date(),
             });
-            navigate("/");
+            navigate("/login");
         } catch (error) {
             console.error("Error during signup:", error);
             setError(error.message);
