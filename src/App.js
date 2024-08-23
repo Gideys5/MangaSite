@@ -19,16 +19,46 @@ import {AuthProvider} from "./context/AuthContext"; // Assicurati di avere `auth
 
 class App extends Component {
     state = {
-        cards: [
-            {id: 1, nome: "Black Clover", trama: "Maghi e demoni che fanno cose", immagine: bc},
-            {id: 2, nome: "One Piece", trama: "Avventura di pirati", immagine: op},
-            {id: 3, nome: "Tokyo Revengers", trama: "Risse di gang giapponesi", immagine: tr},
-            {id: 4, nome: "Jujutsu Kaisen", trama: "Stregonì contro maledizioni", immagine: jk},
-            {id: 5, nome: "Blue Lock", trama: "Chi diventerà il N° 1 nel calcio?", immagine: bl},
-            {id: 6, nome: "Demon Slayer", trama: "Per salvare la sorella dai demoni", immagine: ds},
-        ],
+        cards: [],
         searchTerm: '',
-        cart: []
+    };
+
+    // Funzione per fare fetch all'API e ottenere i primi 50 manga
+    fetchMangaData = async () => {
+        const url = 'https://myanimelist.p.rapidapi.com/anime/top?limit=50';
+
+        const options = {
+            method: 'GET',
+            headers: {
+                'x-rapidapi-key': 'b988c5c6b4msh4bb42f26f293dbfp1764e8jsnb702cbc62581',
+                'x-rapidapi-host': 'myanimelist.p.rapidapi.com'
+            }
+        };
+
+        try {
+            const response = await fetch(url, options);
+            const data = await response.json();
+
+            // Mappare i dati ricevuti e aggiornare lo stato
+            const mangaCards = data.data.map(manga => ({
+                id: manga.mal_id,
+                nome: manga.title,
+                trama: manga.synopsis,
+                immagine: manga.images.jpg.image_url
+            }));
+
+            this.setState({ cards: mangaCards });
+        } catch (error) {
+            console.error('Errore durante il fetch dei manga:', error);
+        }
+    };
+
+    componentDidMount() {
+        this.fetchMangaData(); // Caricare i manga al montaggio del componente
+    }
+
+    handleSearch = (searchTerm) => {
+        this.setState({ searchTerm });
     };
 
     // Caricamento del carrello dal DB
@@ -51,14 +81,6 @@ class App extends Component {
             return [];
         }
     };
-
-    handleSearch = (searchTerm) => {
-        this.setState({searchTerm});
-    };
-
-    componentDidMount() {
-        this.loadCart();
-    }
 
     render() {
         const filteredCards = this.state.cards.filter(card =>
@@ -90,7 +112,6 @@ class App extends Component {
                             <Route path="/checkout" element={<ProtectedRoute><CheckoutForm /></ProtectedRoute>} />
                             <Route path="/signup" element={<Signup/>}/>
                             <Route path="/login" element={<Login/>}/>
-                            {/*<Route path="/checkout" element={<ProtectedRoute element={<CheckoutForm />} />} />*/}
                         </Routes>
                     </div>
                 </Router>

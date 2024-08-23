@@ -1,5 +1,5 @@
 export async function catchAnime(id) {
-    const url = `https://myanimelist.p.rapidapi.com/manga/${id}`;
+    const url = `https://myanimelist.p.rapidapi.com/manga`;
     const options = {
         method: 'GET',
         mode: 'cors',
