@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
 import {auth, db} from '../firebase';
 import { doc, setDoc } from "firebase/firestore";
+import {catchAnime} from "../api/CallManga";
 
 const CartContext = createContext();
 
@@ -15,11 +16,17 @@ export const CartProvider = ({ children }) => {
         }
     };
 
-    const addToCart = (item) => {
+    const addToCart = async  (item) => {
         if (!cart.some(cartItem => cartItem.id === item.id)) {
-            const updatedCart = [...cart, item];
+            const info = await catchAnime(item.id)
+            const updatedItem = {
+                ...item,
+                trama: info.synopsis,
+                volumi: info?.information.volumes || "Ancora in corso"
+            };
+            const updatedCart = [...cart, updatedItem];
             setCart(updatedCart);
-            saveCartToDB(auth.currentUser.uid, updatedCart);
+            await saveCartToDB(auth.currentUser.uid, updatedCart);
 
         }
     };

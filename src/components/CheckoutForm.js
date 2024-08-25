@@ -18,7 +18,8 @@ const CheckoutForm = () => {
         const cartItemsHTML = cart.map(item => `
             <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
                 <h4>${item.nome}</h4>
-                <p>${item.trama}</p>
+                <p>TRAMA:${item.trama}</p>
+                <p>Volumi disponibili: ${item.volumi}</p>
             </div>
         `).join('');
 

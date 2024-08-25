@@ -15,7 +15,7 @@ const Cart = () => {
                             <img src={item.immagine} alt={item.nome} style={{width: `12rem`, height: `10rem`}}/>
                             <div>
                                 <h5>{item.nome}</h5>
-                                <p>{item.trama}</p>
+                                {/*<p>{item.trama}</p>*/}
                             </div>
                             <button
                                 className="btn btn-outline-danger"

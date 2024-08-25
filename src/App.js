@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, {Component} from "react";
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Navbar from "./components/navbar";
 import Card from "./components/card";
 import Cart from "./components/Cart";
@@ -7,8 +7,9 @@ import CheckoutForm from "./components/CheckoutForm";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import ProtectedRoute from './components/ProtectedRoute';
-import { getDoc, doc } from "firebase/firestore";
-import { db, auth } from "./firebase";
+import {getDoc, doc} from "firebase/firestore";
+import {db, auth} from "./firebase";
+import {catchAnime} from "./api/CallManga";
 
 class App extends Component {
     state = {
@@ -23,7 +24,7 @@ class App extends Component {
         const options = {
             method: 'GET',
             headers: {
-                'x-rapidapi-key': 'b988c5c6b4msh4bb42f26f293dbfp1764e8jsnb702cbc62581',
+                'x-rapidapi-key': '451d784a9amsh6c4e6d49475f571p1b35cdjsn958a9a248ee4',
                 'x-rapidapi-host': 'myanimelist.p.rapidapi.com'
             }
         };
@@ -37,10 +38,9 @@ class App extends Component {
                 id: manga.myanimelist_id,
                 nome: manga.title,
                 immagine: manga.picture_url,
-                trama: manga.synopsis || "Trama non disponibile",  // Aggiunta la trama
             }));
 
-            this.setState({ cards: mangaCards });
+            this.setState({cards: mangaCards});
         } catch (error) {
             console.error('Errore durante il fetch dei manga:', error);
         }
@@ -51,14 +51,14 @@ class App extends Component {
     }
 
     handleSearch = (searchTerm) => {
-        this.setState({ searchTerm });
+        this.setState({searchTerm});
     };
 
     // Caricamento del carrello dal DB
     loadCart = async () => {
         if (auth.currentUser) {
             const cartFromDB = await this.fetchCartFromDB(auth.currentUser.uid);
-            this.setState({ cart: cartFromDB });
+            this.setState({cart: cartFromDB});
         }
     }
 
@@ -84,11 +84,11 @@ class App extends Component {
                 <div className="container">
                     <Routes>
                         <Route path="/" element={
-                            <ProtectedRoute>
-                                <>
-                                    <Navbar onSearch={this.handleSearch} />
+                            <>
+                                <Navbar onSearch={this.handleSearch}/>
+                                <ProtectedRoute>
                                     <h3>Seleziona i manga che vuoi aggiungere alla tua libreria!</h3>
-                                    <hr />
+                                    <hr/>
                                     <div className='row'>
                                         {filteredCards.map(card => (
                                             <Card
@@ -98,13 +98,13 @@ class App extends Component {
                                             />
                                         ))}
                                     </div>
-                                </>
-                            </ProtectedRoute>
-                        } />
-                        <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
-                        <Route path="/checkout" element={<ProtectedRoute><CheckoutForm /></ProtectedRoute>} />
-                        <Route path="/signup" element={<Signup />} />
-                        <Route path="/login" element={<Login />} />
+                                </ProtectedRoute>
+                            </>
+                        }/>
+                        <Route path="/cart" element={<ProtectedRoute><Navbar/><Cart/></ProtectedRoute>}/>
+                        <Route path="/checkout" element={<ProtectedRoute><CheckoutForm/></ProtectedRoute>}/>
+                        <Route path="/signup" element={<Signup/>}/>
+                        <Route path="/login" element={<Login/>}/>
                     </Routes>
                 </div>
             </Router>

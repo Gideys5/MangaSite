@@ -48,4 +48,11 @@ Deployment su Firebase:
 Configurazione e setup dell'hosting su Firebase.
 Deployment dell'applicazione e gestione delle versioni.
 Verifica che tutte le funzionalità siano correttamente integrate e funzionanti.
-1. Introduzione a Redux:
+
+
+-REfresh della pagina non ti deve portare al login
+-Controllo variabili (trama e volumi (errore unkonow))
+-Persistenza del carello anche dopo il logout
+-Migliorie estetiche con bootstrap / tutorial login e signup
+-Hosting online dell'app
+-Efficienza del codice e pulizia di esso
